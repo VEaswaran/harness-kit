@@ -1,6 +1,6 @@
 # Harness gates: run on every pull request, whether a person or an AI agent wrote it.
 # In Repository settings > Branch restrictions / Merge checks, require passing builds before merge.
-image: eclipse-temurin:17-jdk
+image: eclipse-temurin:21-jdk
 
 definitions:
   steps:

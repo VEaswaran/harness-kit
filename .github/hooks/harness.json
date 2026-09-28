@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "./.github/hooks/scripts/block-applied-migration-edit.sh",
+        "powershell": "bash ./.github/hooks/scripts/block-applied-migration-edit.sh",
+        "timeoutSec": 15
+      }
+    ]
+  }
+}

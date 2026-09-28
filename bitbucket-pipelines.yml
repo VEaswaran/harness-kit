@@ -1,0 +1,31 @@
+# Harness gates: run on every pull request, whether a person or an AI agent wrote it.
+# In Repository settings > Branch restrictions / Merge checks, require passing builds before merge.
+image: eclipse-temurin:17-jdk
+
+definitions:
+  steps:
+    - step: &migration-gates
+        name: Flyway migration gates
+        clone:
+          depth: full
+        script:
+          - apt-get update -qq && apt-get install -y -qq git >/dev/null
+          - scripts/harness-gates.sh "$BITBUCKET_PR_DESTINATION_BRANCH"
+    - step: &build
+        name: Build, ArchUnit and error catalog tests
+        caches:
+          - gradle
+        services:
+          - docker          # for Testcontainers
+        script:
+          - export TESTCONTAINERS_RYUK_DISABLED=true
+          - ./gradlew check --no-daemon
+        artifacts:
+          - build/reports/**
+
+pipelines:
+  pull-requests:
+    '**':
+      - parallel:
+          - step: *migration-gates
+          - step: *build

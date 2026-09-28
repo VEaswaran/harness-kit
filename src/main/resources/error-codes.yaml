@@ -1,0 +1,18 @@
+# Single error catalog. Format: <DOMAIN>-<S|B|P>-<NNNN>
+# category must match the letter; http must match the Java enum. ErrorCatalogTest enforces both.
+# The Confluence "Error catalog" page is generated from this file (WS1 keeps it in sync).
+codes:
+  PLT-P-1400: { category: PROJECT,  http: 400, title: "Request validation failed" }
+  PLT-P-1401: { category: PROJECT,  http: 400, title: "Malformed request body" }
+  PLT-B-1409: { category: BUSINESS, http: 409, title: "Resource was changed by someone else" }
+  PLT-B-1410: { category: BUSINESS, http: 409, title: "Request conflicts with existing data" }
+  PLT-B-1411: { category: BUSINESS, http: 422, title: "Idempotency key reused with a different request" }
+  PLT-S-5001: { category: SYSTEM,   http: 503, title: "Service temporarily unavailable" }
+  PLT-S-5002: { category: SYSTEM,   http: 504, title: "Upstream dependency timed out" }
+  PLT-S-5003: { category: SYSTEM,   http: 503, title: "Upstream dependency unavailable" }
+  PLT-P-9999: { category: PROJECT,  http: 500, title: "Unexpected internal error" }
+
+  ORD-B-1001: { category: BUSINESS, http: 409, title: "Order already shipped", requirement: REQ-ORD-012 }
+  ORD-B-1002: { category: BUSINESS, http: 422, title: "Order quantity limit exceeded", requirement: REQ-ORD-013 }
+  ORD-S-5001: { category: SYSTEM,   http: 504, title: "Inventory service timed out" }
+  ORD-P-2001: { category: PROJECT,  http: 500, title: "Pricing configuration missing" }
